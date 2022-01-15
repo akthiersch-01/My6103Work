@@ -2,9 +2,10 @@
 print("Hello world")
 print(5 / 8)
 print (7+10)
-print(10/3, 3/10) # print numerical divisions
-print(10//3, 3//10) # print quotients from divisions
-print(10%3, 3%10) # print remainders from divisions
+#Changing values as part of HW 01
+print(15/5, 5/15) # print numerical divisions
+print(49//6, 6//49) # print quotients from divisions
+print(11%3, 3%11) # print remainders from divisions
 
 #%%
 astring = "Thank you"
