@@ -17,4 +17,4 @@ bin-release/
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
 # Here are some lines that I am adding in as part of my assignment for HW #1
-# Ignore files named Icon and DS_Store
+.idea/
