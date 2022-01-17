@@ -1,5 +1,5 @@
 #%%
-print("Hello world")
+print("Hello world, I am Alexander")
 print(5 / 8)
 print (7+10)
 #Changing values as part of HW 01
@@ -8,7 +8,7 @@ print(49//6, 6//49) # print quotients from divisions
 print(11%3, 3%11) # print remainders from divisions
 
 #%%
-astring = "Thank you"
+astring = "Thank you very much"
 anum = 3.14159265358979323846
 cnt = 1
 # Many different ways to print out the same line
