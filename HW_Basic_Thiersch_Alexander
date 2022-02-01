@@ -82,12 +82,24 @@ print("The number of Data Science classes I will take is:", DS_class_total)
 # Thu - 2022/1/13
 # ...
 # You might find something like this useful, especially if you use the remainder property x%7
-dayofweektuple = ('Sun','Mon','Tue','Wed','Thu','Fri','Sat') # day-of-week-tuple
 
-start_date = date(2022/1/1)
-end_date = date(2022/1/31)
+import datetime
 
-for (i in )
+day_of_week_tuple = ('Mon','Tue','Wed','Thu','Fri','Sat','Sun') # day-of-week-tuple
+
+year = 2022
+month = 1
+start_day = 1
+
+days = 31
+
+for day in range(days):
+    weekday = datetime.date(year, month, day+1).weekday()
+    output = "{weekday} - {year}/{month}/{day}".format(weekday=day_of_week_tuple[weekday], year=year, month=month, day=day+1)
+    print(output)
+
+
+
 
 
 
@@ -101,7 +113,17 @@ for (i in )
 # (x Hour, x min, x seconds)
 # ----------------------------------------------------------------
 
+def convert(seconds):
+    seconds = seconds % (24*3600)
+    hour = seconds // 3600
+    seconds %= 3600
+    minutes = seconds // 60
+    seconds %= 60
 
+    return "%d:%02d:%02d" % (hour, minutes, seconds)
+
+seconds = 257364
+print(convert(seconds))
 
 
 
@@ -113,7 +135,19 @@ for (i in )
 # Hint: one way is to create three nested loops.
 # ----------------------------------------------------------------
 
+def permute(str):
+    if len(str) == 0:
+        return['']
+    prev_list = permute(str[1:len(str)])
+    next_list = []
+    for i in range(0,len(prev_list)):
+        for j in range(0,len(str)):
+            new_str = prev_list[i][0:j]+str[0]+prev_list[i][j:len(str)-1]
+            if new_str not in next_list:
+                next_list.append(new_str)
+    return next_list
 
+print(permute('ABC'))
 
 
 
@@ -123,7 +157,19 @@ for (i in )
 # Write a python codes to print all the different arrangements of the
 # letters A, B, C and D. Each string printed is a permutation of ABCD.
 # ----------------------------------------------------------------
+def permute(str):
+    if len(str) == 0:
+        return['']
+    prev_list = permute(str[1:len(str)])
+    next_list = []
+    for i in range(0,len(prev_list)):
+        for j in range(0,len(str)):
+            new_str = prev_list[i][0:j]+str[0]+prev_list[i][j:len(str)-1]
+            if new_str not in next_list:
+                next_list.append(new_str)
+    return next_list
 
+print(permute('ABCD'))
 
 
 
