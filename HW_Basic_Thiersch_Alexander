@@ -197,9 +197,19 @@ print(permute('ABCD'))
 # values, say up to 200.
 # ----------------------------------------------------------------
 
+def prime_num_list(num):
+    for number in range(num+1):
+        if number > 1:
+        
+            for factor in range(2,number):
+                if number%factor == 0:
+                    break
+            else:
+                print(number)
 
 
-
-
+prime_num_list(200)
 
 # =================================================================
+
+# %%
