@@ -42,33 +42,34 @@ for month in range(months):
 total = 62.1 
 
 def find_grade(total):
-  if total <60 :
-    grade = "F"
-  elif total <70 :
-    grade = "D"
-  elif total <73 :
-    grade = "C-"
-  elif total <77 :
-    grade = "C"
-  elif total <80 :
-    grade = "C+"
-  elif total <83 :
-    grade = "B-"
-  elif total <87 :
-    grade = "B"
-  elif total <90 :
-    grade = "B+"
-  elif total <93 :
-    grade = "A-"
-  elif total <100 :
-    grade = "A"
-  # write an appropriate and helpful docstring
-  # ??????    fill in your codes here, be sure you have all A, A-, ... thru D, and F grades completed.
-  # grade = ???
-  return grade
+    """
+    The following is the if statments to determine letter GPA.
+    """
+    if total <60 :
+        grade = "F"
+    elif total <70 :
+        grade = "D"
+    elif total <73 :
+        grade = "C-"
+    elif total <77 :
+        grade = "C"
+    elif total <80 :
+        grade = "C+"
+    elif total <83 :
+        grade = "B-"
+    elif total <87 :
+        grade = "B"
+    elif total <90 :
+        grade = "B+"
+    elif total <93 :
+        grade = "A-"
+    elif total <100 :
+        grade = "A"
 
-# Try:
+    return grade
+
 print(find_grade(total))
+
 
 # Also answer these: 
 # What is the input (function argument) data type for total? 
@@ -82,6 +83,28 @@ print(find_grade(total))
 grade = 'C-'
 
 def to_gradepoint(grade):
+  if grade == "A" :
+    gradepoint = 4.0
+  elif grade == "A-" :
+    gradepoint = 3.7
+  elif grade == "B+" :
+    gradepoint = 3.3
+  elif grade == "B" :
+    gradepoint = 3.0
+  elif grade == "B-" :
+    gradepoint = 2.7
+  elif grade == "C+" :
+    gradepoint = 2.3
+  elif grade == "C" :
+    gradepoint = 2.0
+  elif grade == "C-" :
+    gradepoint = 1.7
+  elif grade == "D+" :
+    gradepoint = 1.3
+  elif grade == "D" :
+    gradepoint = 1.0
+  elif grade == "F" :
+    gradepoint = 0.0
   # write an appropriate and helpful docstring
   # ??????    fill in your codes here, be sure you have all A, A-, ... thru D, and F grades completed.
   # gradepoint = ???
@@ -101,6 +124,29 @@ print(to_gradepoint(grade))
 course = { "class":"IntroDS", "id":"DATS 6101", "semester":"spring", "year":2018, "grade":'B-', "credits":3 } 
 
 def to_gradepoint_credit(course):
+  if course["grade"] == "A" :
+    grade_point_credit = 4.0 * course["credits"]
+  elif course["grade"] == "A-" :
+    grade_point_credit = 3.7 * course["credits"]
+  elif course["grade"] == "B+" :
+    grade_point_credit = 3.2 * course["credits"]
+  elif course["grade"] == "B" :
+    grade_point_credit = 3.0 * course["credits"]
+  elif course["grade"] == "B-" :
+    grade_point_credit = 2.7 * course["credits"]
+  elif course["grade"] == "C+" :
+    grade_point_credit = 2.3 * course["credits"]
+  elif course["grade"] == "C" :
+    grade_point_credit = 2.0 * course["credits"]
+  elif course["grade"] == "C-" :
+    grade_point_credit = 1.7 * course["credits"]
+  elif course["grade"] == "D+" :
+    grade_point_credit = 1.3 * course["credits"]
+  elif course["grade"] == "D" :
+    grade_point_credit = 1.0 * course["credits"]
+  elif course["grade"] == "F" :
+    grade_point_credit = 0.0 * course["credits"]
+
   # write an appropriate and helpful docstring
   # ??????    fill in your codes here
   # grade_point_credit = ?????
@@ -130,13 +176,22 @@ courses = [
   { "class":"Capstone", "id":"DATS 6101", "semester":"fall", "year":2021, "grade":'A-', "credits":3 } 
   ]
 
+
 def find_gpa(courses):
-  # write an appropriate and helpful docstring
-  total_grade_point_credit =0 # initialize 
-  total_credits =0 # initialize
-  # ??????    fill in your codes here
-  # gpa = ?????
+  """insert docstrings here"""
+  total_grade_point_credit = 0  # initialize
+  total_credits = 0  # initialize
+  for course in courses:
+    total_grade_point_credit += to_gradepoint_credit(course)
+    total_credits += course["credits"]
+
+  gpa = total_grade_point_credit/total_credits
+
   return gpa
+  
+  # write an appropriate and helpful docstring
+  # ?????? fill in your codes here
+  # gpa = ?????
 
 # Try:
 print(" %.2f " % find_gpa(courses) )
@@ -153,11 +208,14 @@ print(" %.2f " % find_gpa(courses) )
 course = { "class":"IntroDS", "id":"DATS 6101", "semester":"spring", "year":2018, "grade":'B-', "credits":3 } 
 
 def printCourseRecord(course):
+    GPC = " %.2f " %to_gradepoint_credit(course)
+    output = "{year} {semester} - {id} : {class_name} ({credits} credits) {grade} Grade point credits: {GPC}".format(year=course["year"], semester=course["semester"], id=course["id"], class_name=course["class"], credits=course["credits"], grade=course["grade"], GPC = GPC)
+    print(output)
   # write an appropriate and helpful docstring
   # use a single print() statement to print out a line of info as shown here
   # 2018 spring - DATS 6101 : Intro to DS (3 credits) B-  Grade point credits: 8.10 
   # ??????    fill in your codes here
-  return # or return None
+    return  # or return None
   
 # Try:
 printCourseRecord(course)
@@ -173,14 +231,26 @@ printCourseRecord(course)
 # 2018 fall - DATS 6102 : Data Warehousing (4 credits) A-  Grade point credits: 14.80 
 # ........  few more lines
 # Cumulative GPA: ?????
- 
+courses = [ 
+  { "class":"Intro to DS", "id":"DATS 6101", "semester":"spring", "year":2020, "grade":'B-', "credits":3 } , 
+  { "class":"Data Warehousing", "id":"DATS 6102", "semester":"fall", "year":2020, "grade":'A-', "credits":4 } , 
+  { "class":"Intro Data Mining", "id":"DATS 6103", "semester":"spring", "year":2020, "grade":'A', "credits":3 } ,
+  { "class":"Machine Learning I", "id":"DATS 6202", "semester":"fall", "year":2020, "grade":'B+', "credits":4 } , 
+  { "class":"Machine Learning II", "id":"DATS 6203", "semester":"spring", "year":2021, "grade":'A-', "credits":4 } , 
+  { "class":"Visualization", "id":"DATS 6401", "semester":"spring", "year":2021, "grade":'C+', "credits":3 } , 
+  { "class":"Capstone", "id":"DATS 6101", "semester":"fall", "year":2021, "grade":'A-', "credits":3 } 
+  ]
+
 def printTranscript(courses):
   # write an appropriate and helpful docstring
+ 
   for course in courses:
+    printCourseRecord(course)
+
     # print out each record as before
   
   # after the completion of the loop, print out a new line with the gpa info
-  
+  print("Cumulative GPA:", " %.2f " %find_gpa(courses))
   return # or return None
 
 # Try to run, see if it works as expected to produce the desired result
@@ -196,7 +266,8 @@ printTranscript(courses)
 # 2021 fall - DATS 6101 : Capstone (3 credits) A- Grade point credits: 11.10
 # Cumulative GPA: 3.37
 
-# What is the input (function argument) data type for printTranscript? 
+# What is the input (function argument) data type for printTranscript?
+#  
 # What is the output (function return) data type for printTranscript(courses) ?
 
 
@@ -211,6 +282,7 @@ printTranscript(courses)
 # Let's set it up from here:
 
 def fib(n):
+
   """
   Finding the Fibonacci sequence with seeds of 0 and 1
   The sequence is 0,1,1,2,3,5,8,13,..., where 
@@ -218,6 +290,9 @@ def fib(n):
   :param n: the index, starting from 0
   :return: the sequence
   """
+  if n <= 1:
+    return n
+  return fib(n-1) + fib(n-2)
   # assume n is positive integer
   # ??????    fill in your codes here
 
@@ -247,13 +322,15 @@ def dm_fibonancci(n):
   :param n: the index, starting from 0
   :return: the sequence
   """
-  # assume n is positive integer
-  # ??????    fill in your codes here
-
-  return # return what ????
-
+  if n == 0:
+    return n + 1
+  elif 1 <= n <= 2:
+     return n
+  return dm_fibonancci(n-1) + 2*dm_fibonancci(n-2) - dm_fibonancci(n-3)
 for i in range(12):
   print(dm_fibonancci(i))  # should gives 1,1,2,3,6,10,...
+
+
 
 
 #%%
