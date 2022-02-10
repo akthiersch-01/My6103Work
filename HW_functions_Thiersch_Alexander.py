@@ -17,7 +17,19 @@
 # And use this (copy and paste) 
 # monthofyear = ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec')
 # to simplify your codes.
-    
+
+
+month_of_year = ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec') #month-of-year-tuple
+year_of_school = ('2021','2022','2023','2024','2025') #year-of-school-tuple
+
+months = 46
+
+for month in range(months):
+    output = "{month} {year}".format(month=month_of_year, year=year_of_school)
+    print(output)
+
+
+
 
 ###############  Now:     Functions          Functions             Functions       ###############
 # We will now continue to complete the grade record that we were working on in class.
@@ -27,9 +39,29 @@
 # let us write a function find_grade(total) 
 # which will take your course total (0-100), and output the letter grade (see your syllabus)
 # have a habbit of putting in the docstring
-total = 62.1
+total = 62.1 
 
 def find_grade(total):
+  if total <60 :
+    grade = "F"
+  elif total <70 :
+    grade = "D"
+  elif total <73 :
+    grade = "C-"
+  elif total <77 :
+    grade = "C"
+  elif total <80 :
+    grade = "C+"
+  elif total <83 :
+    grade = "B-"
+  elif total <87 :
+    grade = "B"
+  elif total <90 :
+    grade = "B+"
+  elif total <93 :
+    grade = "A-"
+  elif total <100 :
+    grade = "A"
   # write an appropriate and helpful docstring
   # ??????    fill in your codes here, be sure you have all A, A-, ... thru D, and F grades completed.
   # grade = ???
