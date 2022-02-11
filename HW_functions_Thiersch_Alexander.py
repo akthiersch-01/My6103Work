@@ -20,13 +20,15 @@
 
 
 month_of_year = ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec') #month-of-year-tuple
-year_of_school = ('2021','2022','2023','2024','2025') #year-of-school-tuple
-
-months = 46
-
-for month in range(months):
-    output = "{month} {year}".format(month=month_of_year, year=year_of_school)
-    print(output)
+for year in range(2021,2026):
+  if year == 2021:
+    start_month = 8
+  else:
+    start_month = 0
+  while start_month < 12:
+    curr_month = month_of_year[start_month]
+    print(curr_month, year)
+    start_month += 1
 
 
 
@@ -43,7 +45,11 @@ total = 62.1
 
 def find_grade(total):
     """
-    The following is the if statments to determine letter GPA.
+    The following function reads a float input that is a course total grade. 
+    Then the function runs the input through the if and elif statements to see which criteria the input meets.
+    When the input meets a criteria then the function recognizes that the input is associated with a particular grade string.
+    Then the function returns the grade string.
+    At the end there is a print statement that prints the return of the function.
     """
     if total <60 :
         grade = "F"
@@ -73,7 +79,10 @@ print(find_grade(total))
 
 # Also answer these: 
 # What is the input (function argument) data type for total? 
+  # The function argument data type for total is a float.
+   
 # What is the output (function return) data type for find_grade(total) ?
+  # The function return data type is for find_grade(total) is a string.
 
 
 #%%
@@ -83,6 +92,13 @@ print(find_grade(total))
 grade = 'C-'
 
 def to_gradepoint(grade):
+  """
+  The following function reads a string input that is a letter grade.
+  Then the function runs the input through the if and elif statements to see which criteria the input meets.
+  When the input meets a criteria then the function recognizes that the input is associated with a particular gradepoint float.
+  Then the function returns the gradepoint float.
+  At the end there is a print statement that prints the return of the function.
+  """
   if grade == "A" :
     gradepoint = 4.0
   elif grade == "A-" :
@@ -105,16 +121,17 @@ def to_gradepoint(grade):
     gradepoint = 1.0
   elif grade == "F" :
     gradepoint = 0.0
-  # write an appropriate and helpful docstring
-  # ??????    fill in your codes here, be sure you have all A, A-, ... thru D, and F grades completed.
-  # gradepoint = ???
+
   return gradepoint
 
 # Try:
 print(to_gradepoint(grade))
 
-# What is the input (function argument) data type for find_grade? 
-# What is the output (function return) data type for find_grade(grade) ?
+# What is the input (function argument) data type for to_gradepoint? 
+  # The function argument data type for to_gradepoint is a string. 
+
+# What is the output (function return) data type for to_gradepoint(grade)?
+  # The function return data type for to_gradepoint(grade) is a float.
 
 
 #%%
@@ -124,6 +141,15 @@ print(to_gradepoint(grade))
 course = { "class":"IntroDS", "id":"DATS 6101", "semester":"spring", "year":2018, "grade":'B-', "credits":3 } 
 
 def to_gradepoint_credit(course):
+  """
+  The following function reads an input that is a dictionary called courses.
+  Then the function runs the input through if and elif statements to see which criteria the input meets
+  The if and elif statements specifically index grade within the course dictionary to see which criteria is met.
+  When the input meets a criteria then the function reads next line of code in the conditional statement that multiplies a grade point but the number of credits indexed from the course dictionary.
+  Then the function returns the product of the multiplication between the grade point and the indexed course credits. 
+  Then the function returns the gradpoint credits.
+  At the end there is also a print statemnt that rounds the return value of to_gradepoint_credit(course) by two decimals.
+  """
   if course["grade"] == "A" :
     grade_point_credit = 4.0 * course["credits"]
   elif course["grade"] == "A-" :
@@ -147,21 +173,16 @@ def to_gradepoint_credit(course):
   elif course["grade"] == "F" :
     grade_point_credit = 0.0 * course["credits"]
 
-  # write an appropriate and helpful docstring
-  # ??????    fill in your codes here
-  # grade_point_credit = ?????
-  # eventually, if you need to print out the value to 2 decimal, you can 
-  # try something like this for floating point values %f
-  # print(" %.2f " % grade_point_credit)
   return grade_point_credit
 
 # Try:
 print(" %.2f " % to_gradepoint_credit(course) )
 
 # What is the input (function argument) data type for to_gradepoint_credit? 
-# What is the output (function return) data type for to_gradepoint_credit(course) ?
+  # The function argument data type for to_gradepoint_credit is a dictionary.
 
-
+# What is the output (function return) data type for to_gradepoint_credit(course)?
+  # The function return data type for to_gradepoint_credit(course) is a float.
 #%%
 ###################################### Question 5 ###############################
 # next the function gpa(courses) to calculate the GPA 
@@ -178,7 +199,16 @@ courses = [
 
 
 def find_gpa(courses):
-  """insert docstrings here"""
+  """
+  The function reads the list input courses.
+  The function next initializes the variables total_grade_point_credit and total_credits by setting the equal to 0.
+  Next the function uses a for loop to read the course list.
+  Then the loop iterates through the course list and adds the total number of grade point credits via the to_gradepoint_credit(course) from the previous problem and adds the total number of grade point credits to itself using the += operator.
+  Then the lopp iterates through the course list to determine the total number of credits b
+  After the for loop finishes the function then calulates gpa by dividing the variable total_grade_point_credit over total_credits.
+  Then the function returns the gpa float value
+  At the end there is a print statement that rounds the return value of the find_gpa funtion by two decimal place.
+  """
   total_grade_point_credit = 0  # initialize
   total_credits = 0  # initialize
   for course in courses:
@@ -189,15 +219,15 @@ def find_gpa(courses):
 
   return gpa
   
-  # write an appropriate and helpful docstring
-  # ?????? fill in your codes here
-  # gpa = ?????
 
 # Try:
 print(" %.2f " % find_gpa(courses) )
 
 # What is the input (function argument) data type for find_gpa? 
+  # The function argument data type for find_gpa is a float.
+
 # What is the output (function return) data type for find_gpa(courses) ?
+  # The function return data type for find_gpa(courses) is a float.
 
 
 #%%
@@ -208,21 +238,29 @@ print(" %.2f " % find_gpa(courses) )
 course = { "class":"IntroDS", "id":"DATS 6101", "semester":"spring", "year":2018, "grade":'B-', "credits":3 } 
 
 def printCourseRecord(course):
+    """
+    The following function reads the dictionary input course.
+    Then the function calulates the grade point credit using the to_gradepoint_credit function from the previous problem and rounds its output by two decimals.
+    Then the output variable is formatted using .format. 
+    For each aspect of formatted line is indexed from the course dictionary.
+    Then the function prints the output variable
+    The function does not return anyhting
+    At the end the function printCourseRecord(course) is called.
+    """
     GPC = " %.2f " %to_gradepoint_credit(course)
     output = "{year} {semester} - {id} : {class_name} ({credits} credits) {grade} Grade point credits: {GPC}".format(year=course["year"], semester=course["semester"], id=course["id"], class_name=course["class"], credits=course["credits"], grade=course["grade"], GPC = GPC)
     print(output)
-  # write an appropriate and helpful docstring
-  # use a single print() statement to print out a line of info as shown here
-  # 2018 spring - DATS 6101 : Intro to DS (3 credits) B-  Grade point credits: 8.10 
-  # ??????    fill in your codes here
+  
     return  # or return None
   
 # Try:
 printCourseRecord(course)
 
 # What is the input (function argument) data type for printCourseRecord? 
-# What is the output (function return) data type for printCourseRecord(course) ?
+  # The function argument data type for printCourseRecord is a dictionary.
 
+# What is the output (function return) data type for printCourseRecord(course) ?
+  # There is no function return data type for printCourseRecord(course). This is becasue the return statement is not returning anything.
 
 #%%
 ###################################### Question 7 ###############################
@@ -242,14 +280,17 @@ courses = [
   ]
 
 def printTranscript(courses):
-  # write an appropriate and helpful docstring
+  """
+  The following function uses a for loop that integrates the printCourseRecord(course) from the previous question above.
+  The function reads courses list into the printCourseRecord(course) function. This provides the lines of formatted output that represent the transcript
+  The function then has a print statement that outputs the cumulative GPS for the entire transcript, which rounds GPA to two decimal places.
+  The function does not return anything.
+  At the end the function printTranscript(courses) is called.
+  """
  
   for course in courses:
     printCourseRecord(course)
 
-    # print out each record as before
-  
-  # after the completion of the loop, print out a new line with the gpa info
   print("Cumulative GPA:", " %.2f " %find_gpa(courses))
   return # or return None
 
@@ -267,9 +308,10 @@ printTranscript(courses)
 # Cumulative GPA: 3.37
 
 # What is the input (function argument) data type for printTranscript?
-#  
-# What is the output (function return) data type for printTranscript(courses) ?
+  # The function argument data type for printTranscript is a list.
 
+# What is the output (function return) data type for printTranscript(courses) ?
+  # The function does not have a return data type for printTranscript(courses). This is because the return statement does not return anything.
 
 
 #%% 
@@ -293,8 +335,6 @@ def fib(n):
   if n <= 1:
     return n
   return fib(n-1) + fib(n-2)
-  # assume n is positive integer
-  # ??????    fill in your codes here
 
   return # return what ????
 
@@ -328,7 +368,7 @@ def dm_fibonancci(n):
      return n
   return dm_fibonancci(n-1) + 2*dm_fibonancci(n-2) - dm_fibonancci(n-3)
 for i in range(12):
-  print(dm_fibonancci(i))  # should gives 1,1,2,3,6,10,...
+  print(dm_fibonancci(i))  # should give 1,1,2,3,6,10,...
 
 
 
