@@ -22,13 +22,13 @@
 month_of_year = ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec') #month-of-year-tuple
 for year in range(2021,2026):
   if year == 2021:
-    start_month = 8
+    start_month = 8 #starting in Sept.
   else:
-    start_month = 0
-  while start_month < 12:
+    start_month = 0 #Starting in Jan.
+  while start_month < 12: #When you have reached a New Year
     curr_month = month_of_year[start_month]
     print(curr_month, year)
-    start_month += 1
+    start_month += 1 #Increase the month number
 
 
 
