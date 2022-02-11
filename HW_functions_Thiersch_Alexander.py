@@ -326,11 +326,11 @@ printTranscript(courses)
 def fib(n):
 
   """
-  Finding the Fibonacci sequence with seeds of 0 and 1
-  The sequence is 0,1,1,2,3,5,8,13,..., where 
-  the recursive relation is fib(n) = fib(n-1) + fib(n-2)
-  :param n: the index, starting from 0
-  :return: the sequence
+  The following function determines the Fibonacci Sequence. 
+  Finding the Fibonacci sequence with seeds of 0 and 1.
+  The sequence is 0,1,1,2,3,5,8,13,..., where the recursive relation is fib(n) = fib(n-1) + fib(n-2).
+  param n: the index, starting from 0
+  return: the sequence
   """
   if n <= 1:
     return n
@@ -356,11 +356,11 @@ for i in range(12):
 
 def dm_fibonancci(n):
   """
-  Finding the dm_Fibonacci sequence with seeds of 1, 1, 2 for n = 0, 1, 2 respectively
-  The sequence is 0,1,1,2,3,5,8,13,..., where 
-  the recursive relation is dm_fibonancci(n) = dm_fibonancci(n-1) + 2* dm_fibonancci(n-2) - dm_fibonancci(n-3)
-  :param n: the index, starting from 0
-  :return: the sequence
+  The following function determines the Fibonacci Sequence using a Recursive Function.
+  Finding the dm_Fibonacci sequence with seeds of 1, 1, 2 for n = 0, 1, 2 respectively.
+  The sequence is 0,1,1,2,3,5,8,13,..., where the recursive relation is dm_fibonancci(n) = dm_fibonancci(n-1) + 2* dm_fibonancci(n-2) - dm_fibonancci(n-3).
+  param n: the index, starting from 0.
+  return: the sequence.
   """
   if n == 0:
     return n + 1
