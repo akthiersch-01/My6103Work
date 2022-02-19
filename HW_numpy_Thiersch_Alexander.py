@@ -40,8 +40,10 @@ nparray2 == nparray2b
 nparray2 is nparray2b
 
 # and describe what you find.
-    # nparray2 == nparray2b is True, and nparray2 is nparray2b is False. 
-    # == is used to determine value equity. This determines if the objects have the same value.
+#%% [markdown]
+    # The nparray2 == nparray2b is True, and nparray2 is nparray2b is False. 
+    # == is used to determine value equity. This determines if the objects have the same value.\
+    #
     # Whereas, "is" is used to determine a reference equity. This determine if somehting is the exact same object.
     # nparray2 and nparray2b have the same value, but they are not the same object.
 
@@ -51,9 +53,6 @@ nparray2 is nparray2b
 # ######  Part 1b      Part 1b      Part 1b   ##########
 # 
 # 1.b) What kind of object is i, j, and idlabels? Their shapes? Data types? Strides?
-    # i, j, and idlabels are numpy.ndarray objects.
-    # i, j, and idlabels shapes are 4x3, 4x3, and 2x4x3 respectively.
-    # i, j, and idlabels data types are int64
 # write your codes here
 
 #type
@@ -76,6 +75,12 @@ i.strides  # (24, 8)
 j.strides  # (24, 8)
 idlabels.strides  # (96, 24, 8)
 
+#%% [markdown]
+  # i, j, and idlabels are numpy.ndarray objects.
+  #
+  # i, j, and idlabels shapes are 4x3, 4x3, and 2x4x3 respectively.
+  #
+  # i, j, and idlabels data types are int64
 
 
 # %%
@@ -95,20 +100,29 @@ print(idlabels)
 
 
 # Describe what you find. Is that what you expect?
+#%% [markdown]
     # Prior to altering the i the 0th row of the array displays 0 0 0.
+    #
     # After altering the i the 0th row of the array displays 8 0 0.
-    #However, the idlabels did not change despite altering the array.
-    #The changes to i is what I expected becasue using the index i[0,0] (i[row,column]) and setting it equal to allows us to change a specific value within the array.
-    #It is expecred that the idlabes did not change becasue i[0,0] is speciifcaly changing a value within the array and not the idlabels of each row or column.
+    #
+    # However, the idlabels did not change despite altering the array.
+    #
+    # The changes to i is what I expected becasue using the index i[0,0] (i[row,column]) and setting it equal to allows us to change a specific value within the array.
+    #
+    # It is expecred that the idlabes did not change becasue i[0,0] is speciifcaly changing a value within the array and not the idlabels of each row or column.
 
+#%%
 # Also try to change i[0] = 8. Print out the i and idlabels again.
 
 i[0]=8
 print(i)
 print(idlabels)
 
+#%% [markdown]
 # i[0]=8 changes the specifically all the 0th row values in the i array.
+#
 # This is observed when printing i as all the values in the 0th row are 8.
+#
 # However, the idlabels are still unchaged because the index does not change the id labels of the columns and rows.
 
 # %%
@@ -119,10 +133,14 @@ print(idlabels)
 # now change nparray2c 1,1 position to 0. Check nparray2 and nparray2c again. 
 #
 # Print out the two arrays now. Is that what you expect?
+#%% [markdown]
     # After altering the array nparray2c at position 1,1 to 0, it alterd both nparray2c and nparray2. 
+    #
     # This is not what I expected. I only expected nparray2c to be altered not nparray2 becasue I specifically indexed the nparray2c array.
+    #
     # Additionally, when using == operator both arrays are True and have value equity. However, when using "is" the two arrays a different objects.
     # 
+#%%
 # Also use the "==" operator and "is" operator to test the 2 arrays. 
 # write your codes here
 #
@@ -364,3 +382,5 @@ print(nparray6b)
 
 #%%
 #
+
+# %%
