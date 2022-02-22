@@ -4,8 +4,8 @@
 #%% [markdown]
 #
 # # HW OOP
-# ## By: xxx
-# ### Date: xxxxxxx
+# ## By: Alexander Thiersch
+# ### Date: 02/25/2022
 #
 
 
