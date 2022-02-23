@@ -147,7 +147,7 @@ class Stock:
 
     # fh.close() # close the file handle when done if it was not inside the "with" clause
     # print('fh closed:',fh.closed) # will print out confirmation  fh closed: True
-    return self
+        return self
   
   def compute_delta1_list(self):
     """
