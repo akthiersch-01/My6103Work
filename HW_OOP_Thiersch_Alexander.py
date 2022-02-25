@@ -142,12 +142,19 @@ class Stock:
         #  ######   QUESTION 1    ######   QUESTION 1    ######   QUESTION 1    ######   QUESTION 1    ######  
         # Fill in the codes here to put the right info in the lists self.dates, self.price_eod, self.volumes  
         # Should be similar to the codes in Step 0 above. 
+
+        tmp = aline.split(',')
+        self.dates.append(tmp[0].strip())
+        self.price_eod.append(float(tmp[1]))
+        self.volumes.append(int(tmp[2]))
+
+
         #  ######  END QUESTION 1 ######  END QUESTION 1 ######  END QUESTION 1 ######  END QUESTION 1 ######  
 
 
-    # fh.close() # close the file handle when done if it was not inside the "with" clause
-    # print('fh closed:',fh.closed) # will print out confirmation  fh closed: True
-        return self
+    fh.close() # close the file handle when done if it was not inside the "with" clause
+    print('fh closed:',fh.closed) # will print out confirmation  fh closed: True
+    return self
   
   def compute_delta1_list(self):
     """
@@ -184,6 +191,14 @@ class Stock:
     # Again you might want to print out the first few values of the delta2 list to inspect
     #  ######  END QUESTION 2 ######  END QUESTION 2 ######  END QUESTION 2 ######  END QUESTION 2 ######  
 
+    eod_shift2 = self.delta1.copy() # if you do not use the copy method here, you will get a shallow copy.
+    # The list here is a simple list of floats, not list of lists or list of dictionaries. 
+    # So the copy() function will work. No need for other "deepcopy" variations
+    eod_shift2.pop(0) # remove the first element (shifting the day)
+    self.delta2 = list(map(lambda x,y: x-y, self.delta1, eod_shift2))
+    print(self.name.upper(),": The latest 5 daily changes in delta2: ")
+    for i in range(0,5): print(self.delta2[i]) # checking the first five values
+ 
     return self
   
   def insert_newday(self, newdate, newprice, newvolume):
@@ -206,15 +221,15 @@ class Stock:
     # Fill in the codes here 
     #
     # insert newdate to dates[]
-    self.dates.insert('Something Here')
+    self.dates.insert(0,newdate)
     # insert newvolume to volumes[]
-    self.volumes.insert('Something Here')
+    self.volumes.insert(0,newvolume)
     # insert new eod data value to price_eod
-    self.price_eod.insert('Something Here')
+    self.price_eod.insert(0,newprice)
     # calculate and insert new data to delta1
-    self.delta1.insert('Something Here')
+    self.delta1.insert(0,self.compute_delta1_list().delta1[0])
     # calculate and insert new data to delta2
-    self.delta2.insert('Something Here')
+    self.delta2.insert(0,self.compute_delta2_list().delta2[0])
     #
     #  ######  END QUESTION 3 ######  END QUESTION 3 ######  END QUESTION 3 ######  END QUESTION 3 ######  
 
@@ -225,8 +240,8 @@ class Stock:
     calculate the percentage change in the last n days, returning a percentage between 0 and 100, or sometimes higher.
       """
     #  ######   QUESTION 4    ######   QUESTION 4    ######   QUESTION 4    ######   QUESTION 4    ######  
-    change = 'What should it be?' # calculate the change of price between newest price and n days ago
-    percent = 'What should it be?' # calculate the percent change (using the price n days ago as the base)
+    change = self.price_eod[0]-self.price_eod[n] # calculate the change of price between newest price and n days ago
+    percent = change/self.price_eod[n]*100 # calculate the percent change (using the price n days ago as the base)
     print(f"{self.symbol} : Percent change in {n} days is {percent.__round__(2)}%")
     #  ######  END QUESTION 4 ######  END QUESTION 4 ######  END QUESTION 4 ######  END QUESTION 4 ######  
 
@@ -262,10 +277,28 @@ goog = Stock('GOOG','Alphabet Inc','9/12/14','9/12/19',filepath)
 # use the nday_change_percent method that you defined
 # Find out the stock performances in their percent changes in the last 
 # (i) 50 days
+aapl.nday_change_percent(50)
+msft.nday_change_percent(50)
+goog.nday_change_percent(50)
+print()
+
 # (ii) 200 days (about 1 year)
+aapl.nday_change_percent(200)
+msft.nday_change_percent(200)
+goog.nday_change_percent(200)
+print()
+
 # (iii) 600 days (about 3 years)
+aapl.nday_change_percent(600)
+msft.nday_change_percent(600)
+goog.nday_change_percent(600)
+print()
+
 # Which one perform best in each of the periods above?? 
-# 
+  # The Google stock performed the best in the 50 day period with a percent change of 11.07%
+  # The Microsoft stock performed the best in the 200 day period with a percent of 33.42%
+  # The Microsoft stock performed the best in the 600 day period with a percent of 102.47%
+
 #  ######  END QUESTION 6 ######  END QUESTION 6 ######  END QUESTION 6 ######  END QUESTION 6 ######  
 
 
