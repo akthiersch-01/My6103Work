@@ -28,6 +28,7 @@ print("\nReady to continue.")
 # ######  QUESTION 1      QUESTION 1      QUESTION 1   ##########
 
 # What are the variables in the df? 
+
 # What are the data types for these variables?
 
 # ######  END of QUESTION 1    ###   END of QUESTION 1   ##########
@@ -103,7 +104,7 @@ class Stock:
     
     # ######  END of QUESTION 2    ###   END of QUESTION 2   ##########
 
-    return # you can choose to return self
+    return self # you can choose to return self
 
 
   def add_newday(self, newdate, newprice, newvolume):
@@ -144,9 +145,10 @@ class Stock:
     # ######  QUESTION 4      QUESTION 4      QUESTION 4   ##########
 
     # write your codes here
-    # set volume value
-    # set delta1 value
-    # set delta2 value
+    df.volume[0] = newvolume # set volume value
+    df.delta1[0] = newprice - self.data.price.values[0] # set delta1 value
+    df.delta2[0] = df.delta1[0] - self.data.delta1.values[0] # set delta2 value
+    
     
     # ######  END of QUESTION 4    ###   END of QUESTION 4   ##########
     return df  # return the dataframe with one one row of data
@@ -157,8 +159,8 @@ class Stock:
     """
     # ######  QUESTION 5      QUESTION 5      QUESTION 5   ##########
 
-    # change = ??
-    # percent = ??
+    change = self.data['price'][0] - self.data['price'][n] # change = ??
+    percent = change / self.data['price'][n] * 100 # percent = ??
     
     # ######  END of QUESTION 5    ###   END of QUESTION 5   ##########
     print(self.symbol,": Percent change in",n,"days is {0:.2f}".format(percent))
@@ -173,6 +175,7 @@ class Stock:
 
     # return ??  # you can try to use the .max() function of a pandas dataframe
     
+    return self.data['price'][0:n + 1].max()
     # ######  END of QUESTION 6    ###   END of QUESTION 6   ##########
 
   def nday_min_price(self,n):
@@ -182,6 +185,7 @@ class Stock:
     # ######  QUESTION 7      QUESTION 7      QUESTION 7   ##########
 
     # return ?? 
+    return self.data['price'][0:n + 1].min()
     
     # ######  END of QUESTION 7    ###   END of QUESTION 7   ##########
 
@@ -206,7 +210,6 @@ aapl.data.head()
 #%%
 # Next, re-solve the grade-changing exercise (calculating GPA)
 # 
-
 #%%
 dats = dm.api_dsLand('Dats_grades')
 dm.dfChk(dats)
@@ -223,6 +226,7 @@ dm.dfChk(dats)
 # ######  QUESTION 9      QUESTION 9      QUESTION 9   ##########
 
 # write your codes here
+dats.mean()
 
 # ######  END of QUESTION 9    ###   END of QUESTION 9   ##########
 
@@ -234,6 +238,8 @@ dm.dfChk(dats)
 # ######  QUESTION 10      QUESTION 10      QUESTION 10   ##########
 
 # write your codes here
+dats.insert(8, 'HWavg', dats.iloc[:, 0:8].mean(axis=1))
+
 
 # ######  END of QUESTION 10    ###   END of QUESTION 10   ##########
 
@@ -247,6 +253,7 @@ dats.head() # check result
 # ######  QUESTION 11      QUESTION 11      QUESTION 11   ##########
 
 # write your codes here
+dats['total'] = (dats.HWavg * 8 * 0.30) + dats.Q1 * 0.10 + dats.Q2 * 0.15 + dats.Proj1 * 0.20 + dats.Proj2 * 0.25
 
 # ######  END of QUESTION 11    ###   END of QUESTION 11   ##########
 
@@ -258,6 +265,11 @@ dats.head() # check result
 # ######  QUESTION 12      QUESTION 12      QUESTION 12   ##########
 
 # write your codes here
+dats.mean() # for everything
+
+# Calculate specific
+HWavg_class = dats ['HWavg'].mean()
+total_class = dats['total'].mean()
 
 # ######  END of QUESTION 12    ###   END of QUESTION 12   ##########
 
@@ -286,15 +298,37 @@ def find_grade(total):
   # ######  QUESTION 14      QUESTION 14      QUESTION 14   ##########
 
   # copy your codes here, either from your Week03 hw, or the solution file
+  if total < 60:
+        grade = "F"
+    elif total < 70:
+        grade = "D"
+    elif total < 73:
+        grade = "C-"
+    elif total < 77:
+        grade = "C"
+    elif total < 80:
+        grade = "C+"
+    elif total < 83:
+        grade = "B-"
+    elif total < 87:
+        grade = "B"
+    elif total < 90:
+        grade = "B+"
+    elif total < 93:
+        grade = "A-"
+    elif total < 100:
+        grade = "A"
 
   # ######  END of QUESTION 14    ###   END of QUESTION 14   ##########
-  return # grade  
+  return grade # grade  
 
 #%%
 # Let us create one more column for the letter grade, just call it grade.
 # Instead of broadcasting some calculations on the dataframe directly, we need to apply (instead of broadcast) this find_grade() 
 # function on all the elements in the total column
 # ######  QUESTION 15      QUESTION 15      QUESTION 15   ##########
+
+dats['grade'] = dats['total'].apply(find_grade)
 
 # write your code using the .apply() function to obtaine a new column of letter grade (call that new column 'grade') from the total.
 
