@@ -55,3 +55,21 @@ cnt+=1
 # You can find some cheatsheets to do other basic stuff like bold-face, italicize, tables, etc.
 
 # %%
+
+days = ("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
+
+names = ("John", "Paul", "Mary")
+
+number = (1,29)
+
+for day in days :
+    day = "Tue"
+    
+for name in names :
+    number = 1
+    name= 0
+    output = "{number}-{names}".format(number=number, names=names) 
+    print(output)
+    name += 1
+    number += 1
+
