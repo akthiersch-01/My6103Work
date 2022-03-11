@@ -433,19 +433,16 @@ dats['grade'] = dats['total'].apply(find_grade)
 
 # write your codes here
 grade_value_counts = dats.grade.value_counts().sort_index(ascending=True)
-
 grade_value_counts.keys()
-
 grade_value_counts.values
 
 plt.bar(grade_value_counts.keys(), grade_value_counts.values, color='green')
-plt.title('Bar Chart of Grade Distribution', color='white')
-plt.xlabel('Letter Grade', color='white')
-plt.ylabel('Letter Grade Frequency', color='white')
-plt.tick_params(axis='x', colors='white')  
-plt.tick_params(axis='y', colors='white')
-plt.show()
-
+plt.title('Bar Chart of Grade Distribution', color='black')
+plt.xlabel('Letter Grade', color='black')
+plt.ylabel('Letter Grade Frequency', color='black')
+plt.tick_params(axis='x', colors='black')  
+plt.tick_params(axis='y', colors='black')
+plt.savefig('Bar_Chart_of_Grade_Distribution.jpg')
 
 # ######  END of QUESTION 16    ###   END of QUESTION 16   ##########
 
