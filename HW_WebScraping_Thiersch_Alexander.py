@@ -67,22 +67,26 @@ def getSoup(url,parser=''):
   # ######  QUESTION 1      QUESTION 1      QUESTION 1   ##########
 
   # write your codes here
+  p = parser if (parser == 'lxml' or parser == 'html.parser') else 'html5lib'
+  r = requests.get(url)
+  s = BeautifulSoup(r.content, p)
 
   # ######  END of QUESTION 1    ###   END of QUESTION 1   ##########
-  return   # return some soup
+  return s  # return some soup
 
 def getTempHiLo(soup): # get the block of values of hi-lo temperature on this site
   # ######  QUESTION 2      QUESTION 2      QUESTION 2   ##########
 
   # write your codes here
+  hi_lo = soup.find(class_='hi-lo').text
 
   # ######  END of QUESTION 2    ###   END of QUESTION 2   ##########
-  return # return the text for the hi-lo temperatures
+  return hi_lo # return the text for the hi-lo temperatures
 
 def getDailyTemp(filename): 
   # the source file header has the list of zip codes I want to keep track. 
   # I am using this source file to keep track of the list of zipcodes below: 
-  # zipcodes = ['dc/20052' , 'ny/10001' , 'ca/90210', 'nj/07069', 'va/22207', 'il/60007', 'tx/77001', 'az/85001', 'pa/19019', 'tx/78006']
+  zipcodes = ['dc/20052' , 'ny/10001' , 'ca/90210', 'nj/07069', 'va/22207', 'il/60007', 'tx/77001', 'az/85001', 'pa/19019', 'tx/78006']
   
   # I will use the date string as the key for my dataframe
   tday = datetime.datetime.today()
@@ -93,11 +97,18 @@ def getDailyTemp(filename):
 
   df_new = pd.DataFrame(columns=df_last.columns ) # set a new empty dataframe for new day's data
   df_new.index.name = df_last.index.name # set the index name 
-  df_new = df_new.append(pd.Series(name=tdaystr)) # add a blank row with today's date as index
+  df_new = df_new.append(pd.Series(name=tdaystr, dtype='object')) # add a blank row with today's date as index
 
   # ######  QUESTION 3      QUESTION 3      QUESTION 3   ##########
 
   # write your codes here 
+  for i, zipcode in enumerate(df_last.columns): 
+      zip_url = getUrl(zipcode)
+      zip_soup = getSoup(zip_url, 'html.parser')
+      zip_temp = getTempHiLo(zip_soup)
+
+      df_new.iloc[0, i] = zip_temp
+  df_last = pd.concat([df_new, df_last])
   # You can run the current codes to see what is the df_new and df_last look like. 
   # Need to get the new Temperatures for each location/zip, and put them in the new data frame 
   # Then insert that df_new to the top of df_last.
