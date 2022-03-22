@@ -15,8 +15,10 @@
 # the phrase "machine learning" (case insensitive) in the objective? 
 #
 # 
-# Name:  
-# 
+# Name: Alexander Thiersch
+# Date: 03/22/2022
+# DATS 6103
+# Quiz 2
 
 #%%
 import pandas as pd
@@ -46,23 +48,32 @@ print(classes.head())
 #%%
 # 1
 
+classes['time'].sum()
 
+#234.0
 
 #%%
 # 2
+
+c1 = classes[classes['category'].str.contains('machine learning', na='False', case='False')]
+print(c1)
+c1['time'].sum()
 
 
 
 #%%
 # 3
 
-
+c2 = classes[classes['objective'].str.contains('machine learning', na='False', case='False')]
+print(c2)
+c2['time'].sum()
 
 
 #%%
 # 4
 
-
+c3 = classes[(classes['category'].str.contains('machine learning', na='False', case='False')) | (classes["objective"].str.contains('machine learning', na='False', case='False'))]
+c3['time'].sum()
 
 
 # %%
