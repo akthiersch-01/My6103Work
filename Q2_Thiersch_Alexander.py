@@ -48,9 +48,11 @@ print(classes.head())
 #%%
 # 1
 
+classes.info()
+
 classes['time'].sum()
 
-#234.0
+# 234.0
 
 #%%
 # 2
