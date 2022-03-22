@@ -15,9 +15,9 @@
 # the phrase "machine learning" (case insensitive) in the objective? 
 #
 # 
-# Name: Alexander Thiersch
-# Date: 03/22/2022
-# DATS 6103
+# Name: Alexander Thiersch\
+# Date: 03/22/2022\
+# DATS 6103\
 # Quiz 2
 
 #%%
