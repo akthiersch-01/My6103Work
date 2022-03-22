@@ -55,25 +55,29 @@ classes['time'].sum()
 #%%
 # 2
 
-c1 = classes[classes['category'].str.contains('machine learning', na='False', case='False')]
+c1 = classes[classes['category'].str.contains('machine learning', na=False, case=False)]
 print(c1)
 c1['time'].sum()
 
-
+# 54.5
 
 #%%
 # 3
 
-c2 = classes[classes['objective'].str.contains('machine learning', na='False', case='False')]
+c2 = classes[classes['objective'].str.contains('machine learning', na=False, case=False)]
 print(c2)
 c2['time'].sum()
 
 
+# 15.5
+
 #%%
 # 4
 
-c3 = classes[(classes['category'].str.contains('machine learning', na='False', case='False')) | (classes["objective"].str.contains('machine learning', na='False', case='False'))]
+c3 = classes[(classes['category'].str.contains('machine learning', na=False, case=False)) | (classes["objective"].str.contains('machine learning', na=False, case=False))]
+print(c3)
 c3['time'].sum()
 
+# 61.25
 
 # %%
