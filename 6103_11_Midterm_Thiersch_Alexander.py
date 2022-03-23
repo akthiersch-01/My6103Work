@@ -58,7 +58,7 @@ print("\nReady to continue.")
 #
 # The following project attemps to determine which world between World 1 and World 2 is more "utopian". 
 # A "utopian" world will be defined by how equal it is.
-# For example, with respect to gender, ethnicity, and marital status, does each categorical variable exhibit a distinct gap in annual income? 
+# For example, with respect to gender, ethnicity, and marital status, does each categorical variable exhibit a distinct differences in annual income? Or is annual income equally distributed among gender, ethnicity, and marital status?
 # In other words, a more "utopian" society is a more equal society.
 # The project is divided into multiple sections with various plots that attempt to visualize the equality or inequality in each world. 
 #
@@ -589,7 +589,7 @@ plt.title('World 2: Income vs. Industry by Gender')
 plt.xlabel('Industry')
 plt.ylabel('Annual Income ($)')
 plt.show()
-
+#%% [markdown]
 # # Section 5: Barplots
 #
 # The following section below provides barplots for relevant the numeric variables in World 1 and World 2. 
@@ -753,3 +753,6 @@ plt.show()
 # These barplots are further validated by the initial World 1 boxplots that compared annual income and gender and annual income and ethnicity. 
 # The World 1 annual income vs. gender boxplot demonstrated that males have a larger and higher annual income distribution.
 # The World 2 annual income vs. ethnicity boxplot demonstrated that ethnicity type 2 and had a larger and higher annual income distribution.
+# Overall, it appears that these disparities in World 1 produce an annual income gap among different genders and ethnicities as it relates to years of education.
+
+# %%
