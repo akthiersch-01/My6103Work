@@ -2,12 +2,9 @@
 # To add a new markdown cell, type '#%% [markdown]'
 
 #%% [markdown]
-# Name: Alexander Thiersch
-#
-# Date: 03/22/2022
-#
-# DATS 6103
-#
+# Name: Alexander Thiersch\
+# Date: 03/22/2022\
+# DATS 6103\
 # Midterm
 
 #%%
@@ -755,4 +752,4 @@ plt.show()
 # This is clearly displayed in the last two barplots where there was a clear ethnicity and gender gap related to annual income and years of educations in World 1.
 # These barplots are further validated by the initial World 1 boxplots that compared annual income and gender and annual income and ethnicity. 
 # The World 1 annual income vs. gender boxplot demonstrated that males have a larger and higher annual income distribution.
-# The World 2 annual income vs. ethnicity boxplot demonstrated that ethnicity type 2 and had  a larger and higher annual income distribution.
+# The World 2 annual income vs. ethnicity boxplot demonstrated that ethnicity type 2 and had a larger and higher annual income distribution.
