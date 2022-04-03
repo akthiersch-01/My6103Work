@@ -8,6 +8,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import dm6103 as dm
 
+#%% [markdown]
 # The dataset is obtained from 
 # https://gssdataexplorer.norc.org 
 # for you here. But if you are interested, you can try get it yourself. 
@@ -46,6 +47,14 @@ import dm6103 as dm
 # If you have somewhat of a belief that happiness is caused/determined/affected by number of children, or the other 
 # way around (having babies/children are caused/determined/affected by happiness), then put the dependent 
 # variable in y, and briefly explain your choice.
+#
+# Answer:\
+# Happiness was placed as the dependent variable in the y when comparing the variables happienss and number of children.
+# This was done because if it is expected that having happiness is caused by the number of children this make happiness dependent on the number of children an individual has.
+# If the number of children does determine happiness some kind of pattern or trend is expected to be observed in the data when plotted on a scatterplot.   
+#
+# Additionally, another scatterplot was created to present the dat aif the variables flipped axes.
+# However, neither graph depicts a particularly strong linear trend nor does either graph indicate causality.
 
 dfhappy = dm.api_dsLand('Happy')
 
@@ -185,4 +194,17 @@ plt.show()
 
 
 #%%
+# scatter plot happiness v. number of children by marital
+sns.set_palette('Set2')
+sns.lmplot(y='childs', x='happy', data=dfhappy, y_jitter=0.4,x_jitter=0.2, fit_reg=False, hue='marital', legend=False)
+plt.title("Number of Children vs. Happiness")
+plt.ylabel("Number of Children")
+plt.xlabel("Happiness Level")
+plt.legend(title='Marital Status', loc='upper left', bbox_to_anchor=(1.05, 1.0))
+plt.xticks(np.arange(0,3,1))
+plt.yticks(np.arange(0,13,1))
+plt.show()
 
+# %%
+
+# %%
