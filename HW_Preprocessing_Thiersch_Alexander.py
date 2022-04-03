@@ -206,5 +206,7 @@ plt.yticks(np.arange(0,13,1))
 plt.show()
 
 # %%
-
+# Write dataframe as a csv.
+dfhappy.to_csv("dfhappy.csv")
 # %%
+
