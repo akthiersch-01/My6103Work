@@ -34,13 +34,52 @@ nfl.dropna(inplace=True)
 # With the Titanic dataset, perform some summary visualizations:  
 # 
 # ### a. Histogram on age. Maybe a stacked histogram on age with male-female as two series if possible
+sns.set_palette('Set3')
+chart = sns.histplot(data=titanic, x='age', hue='sex', multiple='stack')
+chart.legend_.set_title('Gender')
+chart.legend_.texts[0].set_text('Male')
+chart.legend_.texts[1].set_text('Female')
+plt.title('Age on the Titanic by Gender')
+plt.xlabel('Age')
+plt.ylabel('Count')
+plt.show()
 
-# ### b. proportion summary of male-female, survived-dead  
+# ### b. proportion summary of male-female, survived-dead
+sns.set_palette('Set3')
+chart = sns.countplot(data=titanic, x='sex', hue='survived')
+chart.legend_.set_title('Survival')
+chart.legend_.texts[0].set_text('Died')
+chart.legend_.texts[1].set_text('Survived')
+plt.title('Gender on the Titanic by Survival')
+plt.xlabel('Gender')
+plt.xticks([0, 1], ['Male', 'Female'])
+plt.ylabel('Count')
+plt.show()
 
-# ### c. pie chart for “Ticketclass”  
+# ### c. pie chart for “Ticketclass”
+pclass_counts = titanic.pclass.value_counts()
+pclass_data = [pclass_counts[1], pclass_counts[2], pclass_counts[3]]
+sns.set_palette('Set3')
+plt.pie(pclass_data, labels=['1st Class', '2nd Class', '3rd Class'], autopct='%0.0f%%')
+plt.title('Ticket Class on the Titanic')
+plt.show()
 
-# ### d. A single visualization chart that shows info of survival, age, pclass, and sex.  
-
+# ### d. A single visualization chart that shows info of survival, age, pclass, and sex.
+chart = sns.catplot(data=titanic, y='age', x='pclass', hue='sex', col='survived', kind='violin', split=True, cut=0)
+chart._legend.set_title('Gender')
+chart._legend.texts[0].set_text('Male')
+chart._legend.texts[1].set_text('Female')
+chart.set_titles()
+col_titles = chart.axes.flatten()
+col_titles[0].set_title('Titanic Passengers who Died')
+col_titles[1].set_title('Titanic Passengers who Survived')
+plt.subplots_adjust(top=0.88)
+plt.suptitle('Age vs. Ticket Class by Gender and Survival', fontweight='bold')
+chart.set_xlabels('Ticket Class')
+plt.xticks([0, 1, 2], ['1st Class', '2nd Class', '3rd Class'])
+chart.set_ylabels('Age')
+plt.show()
+#%%
 # ## Question 2  
 # Build a logistic regression model for survival using the statsmodels library. As we did before, include the features that you find plausible. Make sure categorical variables are use properly. If the coefficient(s) turns out insignificant, drop it and re-build.  
 
@@ -72,8 +111,24 @@ nfl.dropna(inplace=True)
 # 
 #%% 
 # ## Question 5  
-# With the nfl dataset, perform some summary visualizations.  
-# 
+# With the nfl dataset, perform some summary visualizations.
+# name vs total min played
+# create total_min column
+nfl['total_min'] = nfl['min'] + (nfl['sec'] / 60)
+nfl.head()
+
+players = nfl.groupby('name').agg(['sum']).reset_index()
+players.plot(x='name', y='total_min', kind='bar', legend=False, width=1, edgecolor='white', figsize=(12, 8))
+plt.title('Total Minutes Played per Player')
+plt.xlabel('Name')
+plt.ylabel('Minutes')
+plt.subplots_adjust(bottom=.3)
+plt.show()
+
+# scatterplot distance kicked by player
+sns.scatterplot(data=nfl, x='distance', hue='name')
+plt.show()
+#%%
 # ## Question 6  
 # Using the SciKitLearn library, build a logistic regression model overall (not individual team or kicker) to predict the chances of a successful field goal. What variables do you have in your model? 
 # 
