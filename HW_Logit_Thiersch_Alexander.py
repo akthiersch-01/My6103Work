@@ -82,13 +82,25 @@ plt.show()
 #%%
 # ## Question 2  
 # Build a logistic regression model for survival using the statsmodels library. As we did before, include the features that you find plausible. Make sure categorical variables are use properly. If the coefficient(s) turns out insignificant, drop it and re-build.  
+import statsmodels.api as sm
+from statsmodels.formula.api import glm
 
+#surviv_model1 = glm(formula='survived ~ C(pclass)+sex+age+C(sibsp)+C(parch)+ticket+fare+C(embarked)', data=titanic, family=sm.families.Binomial())
+surviv_model1 = glm(formula='survived ~ pclass+sex+age+sibsp+parch+ticket+fare+embarked', data=titanic, family=sm.families.Binomial())
+surviv_model1_Fit = surviv_model1.fit()
+print( surviv_model1_Fit.summary() )
 
 # ## Question 3  
 # Interpret your result. What are the factors and how do they affect the chance of survival (or the survival odds ratio)? What is the predicted probability of survival for a 30-year-old female with a second class ticket, no siblings, 3 parents/children on the trip? Use whatever variables that are relevant in your model.  
 
+# The following results indicate that passengers that were young, women, had a higher ticket class, had a lower number of siblings, had a lower number of parents, and had a higher passenger fare, had a higher chance of survival.
+
+
+
 # ## Question 4  
 # Try three different cut-off values at 0.3, 0.5, and 0.7. What are the a) Total accuracy of the model b) The precision of the model (average for 0 and 1), and c) the recall rate of the model (average for 0 and 1)
+
+
 
 
 #%%[markdown]
@@ -125,9 +137,6 @@ plt.ylabel('Minutes')
 plt.subplots_adjust(bottom=.3)
 plt.show()
 
-# scatterplot distance kicked by player
-sns.scatterplot(data=nfl, x='distance', hue='name')
-plt.show()
 #%%
 # ## Question 6  
 # Using the SciKitLearn library, build a logistic regression model overall (not individual team or kicker) to predict the chances of a successful field goal. What variables do you have in your model? 
