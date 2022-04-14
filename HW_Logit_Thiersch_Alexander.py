@@ -95,7 +95,10 @@ print( surviv_model1_Fit.summary() )
 
 # The following results indicate that passengers that were young, women, had a higher ticket class, had a lower number of siblings, had a lower number of parents, and had a higher passenger fare, had a higher chance of survival.
 
-
+# surviv_model2 = glm(formula='survived ~ sex*0+Q(age*30)+(sibsp*0)+Q(parch*3)+C(ticket)', data=titanic, family=sm.families.Binomial())
+# surviv_model2 = glm(formula='survived ~ (pclass*2)+ Q(age*30)+parch[3]', data=titanic, family=sm.families.Binomial())
+# surviv_model2_Fit = surviv_model2.fit()
+# print( surviv_model2_Fit.summary() )
 
 # ## Question 4  
 # Try three different cut-off values at 0.3, 0.5, and 0.7. What are the a) Total accuracy of the model b) The precision of the model (average for 0 and 1), and c) the recall rate of the model (average for 0 and 1)
