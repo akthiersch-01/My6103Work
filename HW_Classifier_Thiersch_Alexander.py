@@ -12,9 +12,12 @@
 # There is no column names in the csv. You better create a list of names like x0, x1, 
 # or x000, x001, etc, for the 784 columns plus the y-target. Use the list when creating 
 # the dataframe. 
+
 # Which column is the y-target?
-#
+# - The first column
 # Check the shape and data type, make sure everything looks fine.
+# - df.shape == (60000, 785)
+# - df.dtype == object, df.columns.dtype == int64
 #
 # ## Question 2: Preparing the data
 # On my system, if I use all 60k observations, it took a long time to run the classifiers. 
@@ -78,16 +81,21 @@
 import os
 import numpy as np
 import pandas as pd
+from sklearn.datasets import load_digits
+
+# list of column names
+column_names = ['Y']
+for number in range(784):
+    column_names.append('x{:03d}'.format(number))
 
 # Import data
-
+df = pd.read_csv('mnist_train.csv', names=column_names, header=None)
 print("\nReady to continue.")
-
-
-
 #%%
 from sklearn.model_selection import train_test_split
-
+x_8k = df.loc[:, df.columns != 'Y'].head(8000)
+y_8k = df['Y'].head(8000)
+x_train, x_test, y_train, y_test = train_test_split(x_8k, y_8k, train_size=0.8, random_state=333)
 
 print("\nReady to continue.")
 
@@ -95,12 +103,14 @@ print("\nReady to continue.")
 # What do they look like?
 # https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html
 import matplotlib.pyplot as plt 
+
+digits = load_digits()
 plt.gray() 
-# plt.matshow() 
+plt.matshow(digits.images[0]) 
 plt.show() 
 
 plt.gray() 
-# plt.matshow() 
+plt.matshow(digits.images[-1]) 
 plt.show() 
 
 print("\nReady to continue.")
@@ -116,6 +126,24 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn.model_selection import cross_val_score
 
+clf1 = SVC()
+clf2 = SVC(kernel='linear')
+clf3 = LinearSVC()
+clf4 = LogisticRegression()
+clf5 = KNeighborsClassifier()
+clf6 = DecisionTreeClassifier()
+
+clf_list = [clf1, clf2, clf3, clf4, clf5, clf6]
+clf_names = ['SVC', 'SVC(kernel="linear")', 'Linear SVC', 'Logistic Regression', 'KNN', 'Decision Tree']
+
+for clf, name in zip(clf_list, clf_names):
+    clf.fit(x_train, y_train)
+    print(f'{name} train score:  {clf.score(x_train,y_train)}')
+    print(f'{name} test score:  {clf.score(x_test,y_test)}')
+    print(f'============{name} Confusion Matrix============')
+    print(confusion_matrix(y_test, clf.predict(x_test)))
+    print(f'========={name} Classification Report=========')
+    print(classification_report(y_test, clf.predict(x_test)))
 print("\nReady to continue.")
 
 
