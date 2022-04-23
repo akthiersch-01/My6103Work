@@ -100,17 +100,24 @@ x_train, x_test, y_train, y_test = train_test_split(x_8k, y_8k, train_size=0.8, 
 print("\nReady to continue.")
 
 #%%
+# ## Question 3: View some samples 
+# Plot the first and the last row of your train set, and see the image as we 
+# did in class. Make sure the format is a 28x28 array for the plot to work.
+
 # What do they look like?
 # https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html
 import matplotlib.pyplot as plt 
 
-digits = load_digits()
-plt.gray() 
-plt.matshow(digits.images[0]) 
+x_array = np.asarray(x_train)
+x_train_reshape_first = np.reshape(x_array[0], (28, 28))
+plt.gray()
+plt.imshow(x_train_reshape_first) 
+# plt.matshow(digits.images[0]) 
 plt.show() 
 
+x_train_reshape_last = np.reshape(x_array[-1], (28, 28))
 plt.gray() 
-plt.matshow(digits.images[-1]) 
+plt.matshow(x_train_reshape_last) 
 plt.show() 
 
 print("\nReady to continue.")
@@ -155,15 +162,24 @@ print("\nReady to continue.")
 # Or we can start over, and get a set of X and y for CV here. 
 # If we need to change size at some point, it's easier to do it here.
 # NOTE: You might want to temporarily disable auto sleep/hibernation of your computer.
-nmax = 2000 # nmax = 10000 # or other smaller values if your system resource is limited.
+'''nmax = 2000 # nmax = 10000 # or other smaller values if your system resource is limited.
 cvdigits = dfdigits.iloc[0:nmax,:]
 X_cv = cvdigits.iloc[:,1:785] # 28x28 pixels = 784, so index run from 1 to 784 # remember that pandas iloc function like regular python slicing, do not include end number
 print("cvdigits shape: ",cvdigits.shape)
 print("X_cv shape: ",X_cv.shape)
-y_cv = cvdigits.iloc[:,0]
+y_cv = cvdigits.iloc[:,0]'''
 
+x_8k = df.loc[:, df.columns != 'Y'].head(8000)
+y_8k = df['Y'].head(8000)
+x_train, x_test, y_train, y_test = train_test_split(x_8k, y_8k, train_size=0.9, random_state=333)
+
+for clf, name in zip(clf_list, clf_names):
+    %timeit -r 1 print(f'{name} CV score: {cross_val_score(clf, x_train, y_train, cv=10, scoring="accuracy")}')
+
+for clf, name in zip(clf_list, clf_names):
+    %timeit -r 1 print(f'{name} CV score: {cross_val_score(clf, x_train, y_train, cv=10, scoring="accuracy", n_jobs=-1)}')
 # Logit Regression 
-%timeit -r 1 print(f'\nLR CV accuracy score: { cross_val_score(lr, X_cv, y_cv, cv= 10, scoring="accuracy", n_jobs = -1) }\n')   
+# %timeit -r 1 print(f'\nLR CV accuracy score: { cross_val_score(lr, X_cv, y_cv, cv= 10, scoring="accuracy", n_jobs = -1) }\n')   
 # the flag -r 1 is to tell timeit to repeat only 1 time to find the average time. The default is to repeat 7 times.
 # I get something like below
 # without n_jobs, quit: STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
@@ -181,6 +197,81 @@ y_cv = cvdigits.iloc[:,0]
 # nmax = 2000, it took ~ 53.3 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 # It is EIGHT times slower than before. The GPGPU is occupied with other tasks, and unable to 
 # to dedicate on the task at hand.
+"""
+====================8k n_jobs default====================
+SVC CV score: [0.96111111 0.95416667 0.96111111 0.96527778 0.95416667 0.95277778
+ 0.95972222 0.96388889 0.95833333 0.96111111]
+SVC CV score: [0.96111111 0.95416667 0.96111111 0.96527778 0.95416667 0.95277778
+ 0.95972222 0.96388889 0.95833333 0.96111111]
+38 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
 
+SVC(kernel="linear") CV score: [0.91666667 0.91805556 0.92916667 0.93888889 0.92361111 0.9
+ 0.91527778 0.92083333 0.92222222 0.92777778]
+SVC(kernel="linear") CV score: [0.91666667 0.91805556 0.92916667 0.93888889 0.92361111 0.9
+ 0.91527778 0.92083333 0.92222222 0.92777778]
+19 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+Linear SVC CV score: [0.86805556 0.86805556 0.84583333 0.89166667 0.85833333 0.85416667
+ 0.87083333 0.84444444 0.85       0.86111111]
+Linear SVC CV score: [0.86111111 0.86666667 0.85833333 0.86944444 0.86111111 0.85416667
+ 0.87083333 0.84583333 0.84861111 0.87361111]
+18.9 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+Logistic Regression CV score: [0.88472222 0.86111111 0.88611111 0.90416667 0.875      0.86944444
+ 0.88333333 0.87361111 0.86944444 0.87916667]
+Logistic Regression CV score: [0.88472222 0.86111111 0.88611111 0.90416667 0.875      0.86944444
+ 0.88333333 0.87361111 0.86944444 0.87916667]
+10.4 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+KNN CV score: [0.94861111 0.94444444 0.94444444 0.94305556 0.94722222 0.95138889
+ 0.95138889 0.95416667 0.94444444 0.94027778]
+KNN CV score: [0.94861111 0.94444444 0.94444444 0.94305556 0.94722222 0.95138889
+ 0.95138889 0.95416667 0.94444444 0.94027778]
+1.38 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+Decision Tree CV score: [0.78194444 0.78055556 0.7875     0.83333333 0.79305556 0.80972222
+ 0.81944444 0.80833333 0.80555556 0.79583333]
+Decision Tree CV score: [0.78888889 0.79722222 0.77083333 0.83472222 0.79861111 0.80694444
+ 0.82916667 0.8        0.80416667 0.80555556]
+7.31 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+====================8k n_jobs=-1====================
+SVC CV score: [0.96111111 0.95416667 0.96111111 0.96527778 0.95416667 0.95277778
+ 0.95972222 0.96388889 0.95833333 0.96111111]
+SVC CV score: [0.96111111 0.95416667 0.96111111 0.96527778 0.95416667 0.95277778
+ 0.95972222 0.96388889 0.95833333 0.96111111]
+15.6 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+SVC(kernel="linear") CV score: [0.91666667 0.91805556 0.92916667 0.93888889 0.92361111 0.9
+ 0.91527778 0.92083333 0.92222222 0.92777778]
+SVC(kernel="linear") CV score: [0.91666667 0.91805556 0.92916667 0.93888889 0.92361111 0.9
+ 0.91527778 0.92083333 0.92222222 0.92777778]
+8.65 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+Linear SVC CV score: [0.87083333 0.85833333 0.85138889 0.88055556 0.86388889 0.85555556
+ 0.87638889 0.83611111 0.85416667 0.875     ]
+Linear SVC CV score: [0.85       0.85833333 0.85833333 0.87361111 0.85555556 0.84166667
+ 0.86388889 0.84861111 0.85138889 0.86944444]
+4.56 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+Logistic Regression CV score: [0.88472222 0.86111111 0.88611111 0.90416667 0.875      0.86944444
+ 0.88333333 0.87361111 0.86944444 0.87916667]
+Logistic Regression CV score: [0.88472222 0.86111111 0.88611111 0.90416667 0.875      0.86944444
+ 0.88333333 0.87361111 0.86944444 0.87916667]
+3.44 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+KNN CV score: [0.94861111 0.94444444 0.94444444 0.94305556 0.94722222 0.95138889
+ 0.95138889 0.95416667 0.94444444 0.94027778]
+KNN CV score: [0.94861111 0.94444444 0.94444444 0.94305556 0.94722222 0.95138889
+ 0.95138889 0.95416667 0.94444444 0.94027778]
+748 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+Decision Tree CV score: [0.79027778 0.78888889 0.78194444 0.81666667 0.78472222 0.81388889
+ 0.81388889 0.8        0.79861111 0.79861111]
+Decision Tree CV score: [0.78194444 0.78333333 0.78472222 0.83888889 0.80416667 0.80694444
+ 0.81805556 0.79583333 0.81388889 0.80277778]
+1.28 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+
+"""
 
 # %%
