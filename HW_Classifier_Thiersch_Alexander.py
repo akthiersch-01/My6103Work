@@ -14,10 +14,11 @@
 # the dataframe. 
 
 # Which column is the y-target?
-# - The first column
+# - The first column is the y-target.
+#
 # Check the shape and data type, make sure everything looks fine.
-# - df.shape == (60000, 785)
-# - df.dtype == object, df.columns.dtype == int64
+# - The df shape is: df.shape == (60000, 785)
+# - The df type and df column type is: df.dtype == object, df.columns.dtype == int64
 #
 # ## Question 2: Preparing the data
 # On my system, if I use all 60k observations, it took a long time to run the classifiers. 
@@ -72,8 +73,11 @@
 # the cv function took.  The tree algorithm turns out not too bad.
 # 
 # Which classifier is the fastest and the slowest for you?
-# 
-
+# - The fastest classifier using n_jobs default is KNN at 1.38 s.
+# - The slowest classifier using n_jobs default is SVC at 38 s.
+# - The fastset classifier using n_jobs=-1 is is KNN at 748 ms.
+# - The slowest classifier using n_jobs=-1 is SVC at 15.6 s.
+# - In both instances KNN was the fastest and SVC was the slowest classifier.
 
 ###########  HW  ################
 #%%
@@ -105,6 +109,8 @@ print("\nReady to continue.")
 # did in class. Make sure the format is a 28x28 array for the plot to work.
 
 # What do they look like?
+# - The first plot looks like the number six.
+# - The second plot looks like the letter "z"
 # https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html
 import matplotlib.pyplot as plt 
 
